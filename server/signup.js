@@ -1,5 +1,7 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
+
+const { User } = require('./models/users')
 const {validatePassword, validateEmail} = require('../validate/validate.js')
 
 const signup = express.Router()
@@ -22,17 +24,25 @@ signup.post('/addUser', (req, res) => {
 		res.send('Error, email invalido')
 
 	} else {
+
 		const salt = bcrypt.genSaltSync(saltRounds)
 		password = bcrypt.hashSync(password, salt)
-		const userObj = {
+
+		// create new instance of model
+		const Users = new User({
 			name,
 			lastname,
 			email,
 			password
-		}
+		})
 
 		// store in db
-		res.send(userObj)
+		Users.save().then((doc) => {
+			res.send(doc).status(200)
+		}, (e) => {
+			res.send('Error').status(404)
+		})
+
 	}
 })
 
