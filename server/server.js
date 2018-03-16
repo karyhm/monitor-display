@@ -12,7 +12,7 @@ const app = express()
 const publicPath = path.join(__dirname, '../public')
 // configure things for heroku 
 // proces. env port 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8000
 app.use(express.static(publicPath))
 app.use(bodyParser.json())
 
