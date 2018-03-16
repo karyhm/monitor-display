@@ -2,7 +2,7 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 
 const { User } = require('./models/users')
-const {validatePassword, validateEmail} = require('../validate/validate.js')
+const { validatePassword, validateEmail } = require('../validate/validate.js')
 
 const signup = express.Router()
 const saltRounds = 10
@@ -11,16 +11,17 @@ signup.get('/', (req, res) => {
 	res.send('Signup')
 })
 
-signup.post('/addUser', (req, res) => {
-	let password = 'KarinaMont4'
-	const name = 'Karina'
-	const lastname = 'Montenegro'
-	const email = 'karii.mont@gmail.com'
+signup.post('/adduser', (req, res) => {
+	console.log(req.body)
+	let password = req.body.password
+	const name = req.body.name
+	const lastname = req.body.lastname
+	const email = req.body.email
 
 	if (!validatePassword(password)) {
 		res.send(password)
 
-	}	else if (!validateEmail(email)) {
+	} else if (!validateEmail(email)) {
 		res.send('Error, email invalido')
 
 	} else {
@@ -40,7 +41,7 @@ signup.post('/addUser', (req, res) => {
 		Users.save().then((doc) => {
 			res.send(doc).status(200)
 		}, (e) => {
-			res.send('Error').status(404)
+			res.send(e).status(404)
 		})
 
 	}
