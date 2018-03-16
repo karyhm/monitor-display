@@ -1,7 +1,8 @@
+/* global module, require */
 const mongoose = require('mongoose')
 
 // create model
-const User = mongoose.model('User', {
+const Users = mongoose.model('User', {
 	// specify details of each attribute 
 	name: {
 		type: 'String',
@@ -28,4 +29,10 @@ const User = mongoose.model('User', {
 	}
 })
 
-module.exports = {User}
+const sum = function sum(a, b) {
+	return a + b
+}
+module.exports = {
+	Users,
+	sum
+}
