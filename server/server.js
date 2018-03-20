@@ -1,6 +1,8 @@
+/* global require */
 const express = require('express')
 const bodyParser = require('body-parser') // take json and convert it to object attaching it on the req obj
 const path = require('path') // clean path
+const bcrypt = require('bcrypt')
 
 // locals
 const { mongoose } = require('./db/mongoose')
@@ -28,6 +30,31 @@ app.get('/users', (req, res) => {
 		res.send({users})
 	}, (e) => {
 		res.status(400).send(e)
+	})
+})
+
+app.get('/addUser', (req, res) => {
+	let password = req.body.password
+	const name = req.body.name
+	const lastname = req.body.lastname
+	const email = req.body.email
+
+	const salt = bcrypt.genSaltSync(10)
+	password = bcrypt.hashSync(password, salt)
+
+	// create new instance of model
+	const User = new Users({
+		name,
+		lastname,
+		email,
+		password
+	})
+
+	// store in db
+	User.save().then((doc) => {
+		res.send(doc).status(200)
+	}, (e) => {
+		res.send(e).status(404)
 	})
 })
 
