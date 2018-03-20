@@ -33,7 +33,22 @@ app.get('/users', (req, res) => {
 	})
 })
 
-app.get('/addUser', (req, res) => {
+app.get('/user/:id', (req, res) => {
+	const id = req.params.id
+
+	Users.findById(id).then((user) => {
+		if (!user) {
+			res.status(404).send('User Not found')
+			return 
+		}
+		res.send({user})
+	}).catch((e) => {
+		res.status(400).send(e)
+	})
+
+})
+
+app.post('/addUser', (req, res) => {
 	let password = req.body.password
 	const name = req.body.name
 	const lastname = req.body.lastname
