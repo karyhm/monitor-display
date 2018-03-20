@@ -1,16 +1,20 @@
-/* global done, it, describe, beforeEach, require */
+/* global it, describe, beforeEach, require */
 
 const expect = require('chai').expect
 const request = require('supertest')
+const {ObjectID} =  require('mongodb')
+
 const app = require('./../server')
 const { Users, sum } = require('./../models/users')
 
 const usersArr = [{
+	_id: new ObjectID(),
 	name: 'Kary',
 	lastname: 'Hernandez',
 	email: 'ka@ka.com',
 	password: 'password1234'
 }, {
+	_id: new ObjectID(),
 	name: 'Carol',
 	lastname: 'Hernandez',
 	email: 'carol@a.com',
@@ -28,7 +32,7 @@ beforeEach((done) => {
 
 describe('Test addUser', () => {
 
-	it('Create new user', () => {
+	it('POST /user', () => {
 		const user = {
 			name: 'Nombre',
 			lastname: 'Apellido',
@@ -111,4 +115,29 @@ describe('GET /users', () => {
 			})
 			.end(done)
 	})
+})
+
+describe('GET /user/:id', () => {
+	it('Should get single user', (done) => {
+		request(app).get(`/user/${usersArr[0]._id.toHexString()}`) // convert obj to string with toHexString
+			.expect(200)
+			.expect((res) => {
+				expect(res.body.user.name).to.equal(usersArr[0].name)
+			})
+			.end(done)
+	})
+
+	it('Should return 404 if Id not found', (done) => {
+		const id = new ObjectID().toHexString()
+		request(app).get(`/users/${id}`) // convert obj to string with toHexString
+			.expect(404)
+			.end(done)
+	})
+
+	it('Return 404 for non-objects ids', (done) => {
+		request(app).get('/users/123') // convert obj to string with toHexString
+			.expect(404)
+			.end(done)
+	})
+
 })
