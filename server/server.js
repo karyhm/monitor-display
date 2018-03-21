@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser') // take json and convert it to object attaching it on the req obj
 const path = require('path') // clean path
 const bcrypt = require('bcrypt')
+const _ = require('lodash')
 
 // locals
 const { mongoose } = require('./db/mongoose')
@@ -33,7 +34,7 @@ app.get('/users', (req, res) => {
 	})
 })
 
-app.get('/user/:id', (req, res) => {
+app.get('/users/:id', (req, res) => {
 	const id = req.params.id
 
 	Users.findById(id).then((user) => {
@@ -43,12 +44,32 @@ app.get('/user/:id', (req, res) => {
 		}
 		res.send({user})
 	}).catch((e) => {
-		res.status(400).send(e)
+		res.status(404).send(e)
 	})
 
 })
 
-app.post('/addUser', (req, res) => {
+app.delete('/users/:id', (req, res) => {
+	const id = req.params.id
+	// mongoose method
+	Users.findByIdAndRemove(id).then((user) => {
+		if (!user) {
+			res.status(404).send()
+			return
+		}
+		res.status(200).send({user})
+	}).catch((e) => {
+		res.status(404).send(e)
+	})
+})
+
+app.patch('/users/:id', (req, res) => {
+	const id = req.params.id
+	// pull off just properties useres is able to update
+	const body = _.pick(req.body, ['password', 'name', 'lastname', 'email'])
+})
+
+app.post('/users', (req, res) => {
 	let password = req.body.password
 	const name = req.body.name
 	const lastname = req.body.lastname
@@ -64,7 +85,6 @@ app.post('/addUser', (req, res) => {
 		email,
 		password
 	})
-
 	// store in db
 	User.save().then((doc) => {
 		res.send(doc).status(200)

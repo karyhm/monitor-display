@@ -30,21 +30,15 @@ beforeEach((done) => {
 	}).then(() =>  done())
 })
 
-describe('Test addUser', () => {
+// describe('Test addUser', () => {
 
-	it('POST /user', () => {
-		const user = {
-			name: 'Nombre',
-			lastname: 'Apellido',
-			email: 'ka@ka.com',
-			password: 'contrasena'
-		}
+// 	it('POST /users', (done) => {
 
-		// request(app).post('/addUser')
-		// 	.send(user)
+		// request(app).post('/users')
+		// 	.send(usersArr)
 		// 	.expect((res) => {
 		// 		console.log(res.body)
-		// 		expect(res.body.name).to.equal(user.password)
+		// 		expect(res.body.user).to.equal(usersArr)
 		// 	})
 		// 	.end((err, res) => {
 		// 		if (err) {
@@ -53,30 +47,12 @@ describe('Test addUser', () => {
 
 		// 		// fetching all users
 		// 		Users.find().then((users) => {
-		// 			expect(users.length).to.equal(1)
-		// 			expect(users[0].name).to.equal(user.name)
+		// 			// expect(users.length).to.equal(1)
+		// 			expect(users[0].name).to.equal(usersArr[0].name)
 		// 			done()
 		// 		}).catch((err) => done(err))
 		// 	})
-
-		// return signup.post('/addUser')
-		// 	.send(user)
-		// 	.expect(200)
-		// 	.expect((res) => {
-		// 		expect(res.body.user).toBe(user)
-		// 	})
-		// 	.end((err, res) => {
-		// 		if (err) {
-		// 			return done(err)
-		// 		}
-
-		// 		Users.find().then((users) => {
-		// 			expect(users.length).toBe(1)
-		// 			expect(users[0].user).toBe(user)
-		// 			done()
-		// 		}).catch((e) => done(e))
-		// 	})
-	})
+	// })
 
 	// it('Should not create user with invalid body data', () => {
 	// 	const user = {}
@@ -100,11 +76,7 @@ describe('Test addUser', () => {
 	// 		})
 	// })
 
-	it('Sum two numbers', () => {
-		expect(sum(1, 2)).to.equal(3)
-	})
-
-})
+// })
 
 describe('GET /users', () => {
 	it('Should get all users', (done) => {
@@ -117,9 +89,9 @@ describe('GET /users', () => {
 	})
 })
 
-describe('GET /user/:id', () => {
+describe('GET /users/:id', () => {
 	it('Should get single user', (done) => {
-		request(app).get(`/user/${usersArr[0]._id.toHexString()}`) // convert obj to string with toHexString
+		request(app).get(`/users/${usersArr[0]._id.toHexString()}`) // convert obj to string with toHexString
 			.expect(200)
 			.expect((res) => {
 				expect(res.body.user.name).to.equal(usersArr[0].name)
@@ -140,4 +112,38 @@ describe('GET /user/:id', () => {
 			.end(done)
 	})
 
+})
+
+describe('DELETE /users/:id', () => {
+	it('Should remove a user', (done) => {
+		const hexId = usersArr[1]._id.toHexString()
+		request(app).delete(`/users/${hexId}`)
+			.expect(200)
+			.expect(res => {
+				expect(res.body.user._id).to.equal(hexId)
+			})
+			.end((err, res) => {
+				if (err) {
+					return done(err)
+				}
+
+				Users.findById(hexId).then((user) => {
+					expect(user).to.be.a('null')
+					done()
+				}).catch((e) => done(e))
+			})
+	})
+
+	it('Should return 404 if user not found', (done) => {
+		const id = new ObjectID().toHexString()
+		request(app).delete(`/users/${id}`)
+			.expect(404)
+			.end(done)
+	})
+
+	it('Should return 404 if id is invalid', (done) => {
+		request(app).delete('/users/1234')
+			.expect(404)
+			.end(done)
+	})
 })
