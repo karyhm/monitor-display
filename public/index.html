@@ -65,21 +65,21 @@
 			  </button>
 			</div>
 			<div class="modal-body">
-				<!--<form>-->
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-					  <span class="input-group-text" id="basic-addon1">@</span>
-					</div>
-					<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+				<form method="GET">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+					  	<span class="input-group-text" id="basic-addon1">@</span>
+						</div>
+						<input type="text" name="name" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 				  </div>
 				  <div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+						<input type="text" name="pass" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
 				  </div>
-				<!--</form>-->
+				</form>
 			</div>
 			<div class="modal-footer">
 			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			  <button type="button" class="btn btn-primary">Confirm</button>
+			  <input type="submit" value="Submit" class="btn btn-primary"/>
 			</div>
 		  </div>
 		</div>
@@ -96,24 +96,24 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<!--<form>-->
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon1">@</span>
-						</div>
-						<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+					<form method="GET">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">@</span>
+							</div>
+							<input type="text" name="name" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 						</div>
 						<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+							<input type="text" name="passone" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1">
+							<input type="text" name="passtwo" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1">
 						</div>
-					<!--</form>-->
+					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Confirm</button>
+					<input type="submit" value="Submit" class="btn btn-primary"/>
 				</div>
 				</div>
 			</div>
