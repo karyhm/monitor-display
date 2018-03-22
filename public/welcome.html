@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../../../favicon.ico">
+
+	<title>Mi Band Monitor Display</title>
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+
+	<header>
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<a class="navbar-brand" href="#">Fixed navbar</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+			 aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Link</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link disabled" href="#">Disabled</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<button class="btn btn-primary" data-toggle="modal" data-target="#modalLogIn">Log In</button>
+					</li>
+					<li class="nav-item">
+						<button class="btn btn-primary mr-sm-2 mx-sm-2" data-toggle="modal" data-target="#modalSignUp">Sign Up</button>
+					</li>
+				</ul>
+				<form class="form-inline mt-2 mt-md-0">
+					<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+	</header>
+
+	<!--Log In form-->
+	<div class="modal fade" id="modalLogIn" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="ModalLabel">Log In</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<form method="GET">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+					  	<span class="input-group-text" id="basic-addon1">@</span>
+						</div>
+						<input type="text" name="name" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+				  </div>
+				  <div class="input-group mb-3">
+						<input type="text" name="pass" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+				  </div>
+				</form>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			  <input type="submit" value="Submit" class="btn btn-primary"/>
+			</div>
+		  </div>
+		</div>
+		</div>
+		
+		<!--Sign Up form-->
+		<div class="modal fade" id="modalSignUp" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ModalLabel">Sign Up</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="GET">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">@</span>
+							</div>
+							<input type="text" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" name="usname" class="form-control" placeholder="User name" aria-label="User name" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" name="passone" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" name="passtwo" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="blablabla">I forgot my password</a>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<input type="submit" value="Submit" class="btn btn-primary"/>
+				</div>
+				</div>
+			</div>
+			</div>
+
+	<!-- Begin page content -->
+	<main role="main" class="container">
+		<h1 class="mt-5">Xiaomi Mi Band Monitor Display</h1>
+		<p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar
+			has been added with
+			<code>padding-top: 60px;</code> on the
+			<code>body &gt; .container</code>.</p>
+		<p>Back to
+			<a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">Place sticky footer content here.</span>
+		</div>
+	</footer>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
