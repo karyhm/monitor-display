@@ -1,4 +1,5 @@
-/* global require */
+require('./config/config')
+/* global require process */
 const express = require('express')
 const bodyParser = require('body-parser') // take json and convert it to object attaching it on the req obj
 const path = require('path') // clean path
@@ -18,7 +19,7 @@ const app = express()
 const publicPath = path.join(__dirname, '../public')
 // configure things for heroku 
 // proces. env port 
-const port = process.env.PORT || 8000
+const port = process.env.PORT
 app.use(express.static(publicPath))
 app.use(bodyParser.json())
 
