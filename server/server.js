@@ -67,6 +67,11 @@ app.patch('/users/:id', (req, res) => {
 	const id = req.params.id
 	// pull off just properties useres is able to update
 	const body = _.pick(req.body, ['password', 'name', 'lastname', 'email'])
+	Users.findByIdAndUpdate(id, {$set: body}, {new: true}).then((user) => { // returns new objs
+		res.send({user})
+	}).catch((e) => {
+		res.status(400).send(e)
+	})
 })
 
 app.post('/users', (req, res) => {

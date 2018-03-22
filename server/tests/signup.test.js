@@ -147,3 +147,20 @@ describe('DELETE /users/:id', () => {
 			.end(done)
 	})
 })
+
+describe('PATCH /users/:id', () => {
+	it('Should update a user', (done) => {
+		const hexId = usersArr[1]._id.toHexString()
+		const obj = {
+			name: 'Camila',
+			email: 'camila@cat.mx'
+		}
+		request(app).patch(`/users/${hexId}`)
+			.send(obj)
+			.expect(200)
+			.expect(res => {
+				expect(res.body.user.name).to.equal(obj.name)
+			})
+			.end(done)
+	})
+})
