@@ -1,5 +1,6 @@
 /* global module, require */
 const mongoose = require('mongoose')
+const validator = require('validator') // validator library
 
 // create model
 const Users = mongoose.model('User', {
@@ -19,14 +20,30 @@ const Users = mongoose.model('User', {
 	email: {
 		type: 'String',
 		required: true,
-		trim: true
+		trim: true,
+		minlength: 1,
+		unique: true, // only a unique email,
+		validate: {
+			validator: validator.isEmail,
+			message: '{VALUE} is not a valid email'
+		}
 	},
 	password: {
 		type: 'String',
 		required: true,
 		minlength: 8,
 		trim: true
-	}
+	},
+	tokens: [{
+		access: {
+			type: String,
+			required: true
+		},
+		token: {
+			type: String,
+			required: true
+		}
+	}]
 })
 
 const sum = function sum(a, b) {
