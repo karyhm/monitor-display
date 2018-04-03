@@ -10,7 +10,51 @@
 
 	<script>
 		function logInValidation(){
-			alert("working right");
+			var uName = document.forms["logIn"]["name"].value;
+			var pass = document.forms["logIn"]["pass"].value;
+			if(uName != ""){
+				if (uName.length >= 6) {
+					var obj = JSON.parse(localStorage.getItem('userStorage'));
+					if(obj.username == uName && obj.password == pass){
+						alert("Welcome " + uName);
+						window.location.assign("/welcome.html");
+					}
+				}
+			}
+			else{
+				alert("Please enter a value for User Name");
+			}
+		}
+
+		function signUpValidation(event){
+			event.preventDefault();
+			alert("!");
+			var mail = document.forms["signUp"]["email"].value;
+			var uName = document.forms["signUp"]["usname"].value;
+			var passone = document.forms["signUp"]["passone"].value;
+			var passtwo = document.forms["signUp"]["passtwo"].value;
+
+			if (uName != "") {
+				if (uName.length >= 6) {
+					if (passone != "" && passone.length >= 6) {
+						if (passone == passtwo) {
+							alert("User stored");
+						}
+						else{
+							alert("Passwords do not match");
+						}
+					}
+					else{
+						alert("Please fill Password field with a correct value. Your password must be 6 characters or more");
+					}
+				}
+				else{
+					alert("User name should be 6 characters or more")
+				}
+			}
+			else{
+				alert("Please enter a value for User Name");
+			}
 		}
 	</script>
 
@@ -70,7 +114,7 @@
 				<span aria-hidden="true">&times;</span>
 			  </button>
 			</div>
-			<form name="logIn" onsubmit="return logInValidation()" method="GET">
+			<form name="logIn" onsubmit="return logInValidation()" method="POST">
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -101,8 +145,8 @@
 					<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
-					<form method="GET">
+				<form name="signUp" onsubmit="return signUpValidation(event)" method="POST">
+					<div class="modal-body">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">@</span>
@@ -118,13 +162,13 @@
 						<div class="input-group mb-3">
 							<input type="text" name="passtwo" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1">
 						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<a href="blablabla">I forgot my password</a>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<input type="submit" value="Submit" class="btn btn-primary"/>
-				</div>
+					</div>
+					<div class="modal-footer">
+						<a href="blablabla">I forgot my password</a>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<input type="submit" value="Submit" class="btn btn-primary"/>
+					</div>
+				</form>
 				</div>
 			</div>
 			</div>
