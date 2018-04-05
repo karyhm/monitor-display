@@ -1,9 +1,11 @@
 /* global module, require */
 const mongoose = require('mongoose')
 const validator = require('validator') // validator library
+const jwt = require('jsonwebtoken')
+const _ = require ('lodash')
 
-// create model
-const Users = mongoose.model('User', {
+// create model. Schema property lets you defined a new schema in order to tack a custom method
+const UserSchema = new mongoose.Schema({
 	// specify details of each attribute 
 	name: {
 		type: 'String',
@@ -46,9 +48,33 @@ const Users = mongoose.model('User', {
 	}]
 })
 
+// determines what gets sent back
+UserSchema.methods.toJSON = function () {
+	const user =this
+	const userObj = user.toObject() // taking moongoose var and converting to an obj
+
+	return _.pick(userObj, ['_id', 'email']) // return only id and email
+}
+
+// on this object we can add any method we like
+UserSchema.methods.generateAuthToken = function () {
+	const user = this
+	const access = 'auth'
+	const token = jwt.sign({_id: user._id.toHexString(), access}, 'salty').toString()
+
+	// update tokens array
+	user.tokens = user.tokens.concat([{ access, token }])
+	return user.save().then(() => {
+		return token
+	})
+}
+
+const Users = mongoose.model('User', UserSchema)
+
 const sum = function sum(a, b) {
 	return a + b
 }
+
 module.exports = {
 	Users,
 	sum

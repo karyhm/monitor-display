@@ -91,10 +91,13 @@ app.post('/users', (req, res) => {
 		email,
 		password
 	})
+
 	// store in db
-	User.save().then((doc) => {
-		res.send(doc).status(200)
-	}, (e) => {
+	User.save().then(() => {
+		return User.generateAuthToken()
+	}).then((token) => {
+		res.header('x-auth', token).send(User)
+	}).catch((e) => {
 		res.send(e).status(404)
 	})
 })
