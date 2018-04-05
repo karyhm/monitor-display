@@ -28,7 +28,6 @@
 
 		function signUpValidation(event){
 			event.preventDefault();
-			alert("!");
 			var mail = document.forms["signUp"]["email"].value;
 			var uName = document.forms["signUp"]["usname"].value;
 			var passone = document.forms["signUp"]["passone"].value;
@@ -49,6 +48,8 @@
 					}
 				}
 				else{
+					$("#userNameDiv").addClass("has-error input-group mb-3");
+					$('[data-toggle="popover"]').popover();
 					alert("User name should be 6 characters or more")
 				}
 			}
@@ -154,8 +155,9 @@
 							</div>
 							<input type="text" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
 						</div>
-						<div class="input-group mb-3">
-							<input type="text" name="usname" class="form-control" placeholder="User name" aria-label="User name" aria-describedby="basic-addon1">
+						<div id="userNameDiv" class="input-group mb-3">
+							<input type="text" name="usname" class="form-control" placeholder="User name" aria-label="User name" aria-describedby="basic-addon1"
+								data-toggle="popover" data-content="User name must be 6 characters or more">
 						</div>
 						<div class="input-group mb-3">
 							<input type="text" name="passone" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
