@@ -8,57 +8,6 @@
 	<meta name="author" content="">
 	<link rel="icon" href="resources/system-task-64.png">
 
-	<script>
-		function logInValidation(){
-			var uName = document.forms["logIn"]["name"].value;
-			var pass = document.forms["logIn"]["pass"].value;
-			if(uName != ""){
-				if (uName.length >= 6) {
-					var obj = JSON.parse(localStorage.getItem('userStorage'));
-					if(obj.username == uName && obj.password == pass){
-						alert("Welcome " + uName);
-						window.location.assign("/welcome.html");
-					}
-				}
-			}
-			else{
-				alert("Please enter a value for User Name");
-			}
-		}
-
-		function signUpValidation(event){
-			event.preventDefault();
-			var mail = document.forms["signUp"]["email"].value;
-			var uName = document.forms["signUp"]["usname"].value;
-			var passone = document.forms["signUp"]["passone"].value;
-			var passtwo = document.forms["signUp"]["passtwo"].value;
-
-			if (uName != "") {
-				if (uName.length >= 6) {
-					if (passone != "" && passone.length >= 6) {
-						if (passone == passtwo) {
-							alert("User stored");
-						}
-						else{
-							alert("Passwords do not match");
-						}
-					}
-					else{
-						alert("Please fill Password field with a correct value. Your password must be 6 characters or more");
-					}
-				}
-				else{
-					$("#userNameDiv").addClass("has-error input-group mb-3");
-					$('[data-toggle="popover"]').popover();
-					alert("User name should be 6 characters or more")
-				}
-			}
-			else{
-				alert("Please enter a value for User Name");
-			}
-		}
-	</script>
-
 	<title>Mi Band Monitor Display</title>
 
 	<!-- Bootstrap core CSS -->
@@ -200,6 +149,60 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script>
+		function logInValidation(){
+			var uName = document.forms["logIn"]["name"].value;
+			var pass = document.forms["logIn"]["pass"].value;
+			if(uName != ""){
+				if (uName.length >= 6) {
+					var obj = JSON.parse(localStorage.getItem('userStorage'));
+					if(obj.username == uName && obj.password == pass){
+						alert("Welcome " + uName);
+						window.location.assign("/welcome.html");
+					}
+				}
+			}
+			else{
+				alert("Please enter a value for User Name");
+			}
+		}
+
+		function signUpValidation(event){
+			event.preventDefault();
+			var mail = document.forms["signUp"]["email"].value;
+			var uName = document.forms["signUp"]["usname"].value;
+			var passone = document.forms["signUp"]["passone"].value;
+			var passtwo = document.forms["signUp"]["passtwo"].value;
+
+			if (uName != "") {
+				if (uName.length >= 6) {
+					if (passone != "" && passone.length >= 6) {
+						if (passone == passtwo) {
+							alert("User stored");
+						}
+						else{
+							alert("Passwords do not match");
+						}
+					}
+					else{
+						alert("Please fill Password field with a correct value. Your password must be 6 characters or more");
+					}
+				}
+				else {
+					// bootstrap 4 usa is-ivalid/is-valid en lugar de has-error. Dicha clase va sobre el input
+					// fuente: https://getbootstrap.com/docs/4.0/migration/#forms-1 (El penultimo punto)
+					// info de la validacion https://getbootstrap.com/docs/4.0/components/forms/#validation
+					$("#userNameDiv input").addClass("is-invalid");
+					$('[data-toggle="popover"]').popover();
+					alert("User name should be 6 characters or more")
+				}
+			}
+			else{
+				alert("Please enter a value for User Name");
+			}
+		}
+	</script>
 </body>
 
 </html>
