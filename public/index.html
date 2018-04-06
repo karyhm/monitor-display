@@ -98,7 +98,7 @@
 				</div>
 				<form name="signUp" onsubmit="return signUpValidation(event)" method="POST">
 					<div class="modal-body">
-						<div class="input-group mb-3">
+						<div id="eMail" class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">@</span>
 							</div>
@@ -106,13 +106,15 @@
 						</div>
 						<div id="userNameDiv" class="input-group mb-3">
 							<input type="text" name="usname" class="form-control" placeholder="User name" aria-label="User name" aria-describedby="basic-addon1"
-								data-toggle="popover" data-content="User name must be 6 characters or more">
+								data-toggle="tooltip" data-placement="right" title="User name must be 6 characters or more">
 						</div>
-						<div class="input-group mb-3">
-							<input type="text" name="passone" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+						<div id="pass"class="input-group mb-3">
+							<input type="text" name="passone" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"
+							data-toggle="tooltip" data-placement="right">
 						</div>
-						<div class="input-group mb-3">
-							<input type="text" name="passtwo" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1">
+						<div id="pass" class="input-group mb-3">
+							<input type="text" name="passtwo" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1"
+							data-toggle="tooltip" data-placement="right">
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -174,32 +176,75 @@
 			var uName = document.forms["signUp"]["usname"].value;
 			var passone = document.forms["signUp"]["passone"].value;
 			var passtwo = document.forms["signUp"]["passtwo"].value;
+			var mailValidation = false;
+			var userValidation = false;
+			var passWordValidation = false;
+			var mailFilter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-			if (uName != "") {
-				if (uName.length >= 6) {
-					if (passone != "" && passone.length >= 6) {
-						if (passone == passtwo) {
-							alert("User stored");
-						}
-						else{
-							alert("Passwords do not match");
-						}
-					}
-					else{
-						alert("Please fill Password field with a correct value. Your password must be 6 characters or more");
-					}
+			if ((mail != null)&&(mail != "")) {
+				$("#eMail input").removeClass("is-invalid");
+				$("#eMail input").addClass("is-valid");
+				var isEmail = mailFilter.test(mail);
+				if (isEmail) {
+					$("#eMail input").removeClass("is-invalid");
+					$("#eMail input").addClass("is-valid");
+					mailValidation = true;
 				}
-				else {
-					// bootstrap 4 usa is-ivalid/is-valid en lugar de has-error. Dicha clase va sobre el input
-					// fuente: https://getbootstrap.com/docs/4.0/migration/#forms-1 (El penultimo punto)
-					// info de la validacion https://getbootstrap.com/docs/4.0/components/forms/#validation
-					$("#userNameDiv input").addClass("is-invalid");
-					$('[data-toggle="popover"]').popover();
-					alert("User name should be 6 characters or more")
+				else{
+					$("#eMail input").removeClass("is-valid");
+					$("#eMail input").addClass("is-invalid");
+					mailValidation = false;
 				}
 			}
 			else{
-				alert("Please enter a value for User Name");
+				$("#eMail input").removeClass("is-valid");
+				$("#eMail input").addClass("is-invalid");
+				mailValidation = false;
+			}
+
+			if (uName != "") {
+				$("#userNameDiv input").removeClass("is-invalid");
+				$("#userNameDiv input").addClass("is-valid");
+				if (uName.length >= 6) {
+					$("#userNameDiv input").removeClass("is-invalid");
+					$("#userNameDiv input").addClass("is-valid");
+					userValidation = true;
+				}
+				else{
+					$("#userNameDiv input").removeClass("is-valid");
+					$("#userNameDiv input").addClass("is-invalid");
+					$('#userNameDiv input').tooltip();
+					userValidation = false;
+				}
+			}
+			else{
+				$("#userNameDiv input").removeClass("is-valid");
+				$("#userNameDiv input").addClass("is-invalid");
+				$('#userNameDiv input').tooltip();
+				userValidation = false;
+			}
+
+			if (passone != "" && passone.length >= 6) {
+				if (passone == passtwo) {
+					$("#pass input").removeClass("is-invalid");
+					$("#pass input").addClass("is-valid");
+					passWordValidation = true;
+				}
+				else{
+					$("#pass input").addClass("is-invalid");
+					$("#pass input").attr("title", "Passwords do not match")
+					$('#pass input').tooltip();
+					passWordValidation = true;
+				}
+			}
+			else{
+				$("#pass input").addClass("is-invalid");
+				$("#pass input").attr("title", "Please fill Password field with a correct value. Your password must be 6 characters or more")
+				$('#pass input').tooltip();
+				passWordValidation = true;
+			}
+			if (mailValidation == true && userValidation == true && passWordValidation == true) {
+			alert("yes");
 			}
 		}
 	</script>
