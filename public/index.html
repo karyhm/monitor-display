@@ -74,7 +74,7 @@
 						<input type="text" name="name" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 					</div>
 					<div class="input-group mb-3">
-						<input type="text" name="pass" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+						<input type="password" name="pass" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -109,11 +109,11 @@
 								data-toggle="tooltip" data-placement="right" title="User name must be 6 characters or more">
 						</div>
 						<div id="pass"class="input-group mb-3">
-							<input type="text" name="passone" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"
+							<input type="password" name="passone" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"
 							data-toggle="tooltip" data-placement="right">
 						</div>
 						<div id="pass" class="input-group mb-3">
-							<input type="text" name="passtwo" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1"
+							<input type="password" name="passtwo" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon1"
 							data-toggle="tooltip" data-placement="right">
 						</div>
 					</div>
@@ -234,17 +234,17 @@
 					$("#pass input").addClass("is-invalid");
 					$("#pass input").attr("title", "Passwords do not match")
 					$('#pass input').tooltip();
-					passWordValidation = true;
+					passWordValidation = false;
 				}
 			}
 			else{
 				$("#pass input").addClass("is-invalid");
 				$("#pass input").attr("title", "Please fill Password field with a correct value. Your password must be 6 characters or more")
 				$('#pass input').tooltip();
-				passWordValidation = true;
+				passWordValidation = false;
 			}
 			if (mailValidation == true && userValidation == true && passWordValidation == true) {
-			alert("yes");
+				alert("yes");
 			}
 		}
 	</script>
